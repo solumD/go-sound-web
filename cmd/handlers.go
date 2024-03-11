@@ -8,7 +8,7 @@ import (
 
 func homeHandler(w http.ResponseWriter, r *http.Request) {
 	//парсим html-шаблон
-	tmpl, err := template.ParseFiles("ui/home_page.html")
+	tmpl, err := template.ParseFiles("ui/html/home_page.html")
 	if err != nil {
 		log.Println(err)
 		http.Error(w, "Internal server error", 500)
