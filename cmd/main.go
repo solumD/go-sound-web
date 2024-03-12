@@ -10,7 +10,8 @@ import (
 func main() {
 	r := chi.NewRouter()
 	r.Get(`/`, homeHandler)
-
+	r.Get(`/signin`, regGet)
+	r.Post(`/signin`, regPost)
 	fs := http.FileServer(http.Dir("./ui/static/"))
 	r.Handle("/static/*", http.StripPrefix("/static/", fs))
 

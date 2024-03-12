@@ -1,0 +1,115 @@
+
+body{
+    background-color: #282828;
+}
+h1{
+    color: white;
+}
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+nav .left .a .right{
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+}
+nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 80px;
+    max-width: 1200px;
+    height: 80px;
+    margin: auto;
+    background-color: #36353d;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+}
+a{
+    text-decoration: none;
+    color: white;
+    transition: all 0.3s ease;
+}
+a:hover{
+    color: black;
+}
+nav .left{
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+nav .left .links{
+    display: flex;
+    gap: 30px;
+    font-size: 12px;
+    font-weight: bold;
+}
+nav .right{
+    margin:0 30px;
+}
+.content{
+    font-size: 1.2em;
+    margin: 40px 50px 10px 50px;
+}
+.newbooks{
+    height: 280px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.newbooks .newbook{
+    display: flex;
+    height: 100%;
+    width: 49%;   
+    color: white;
+}
+.newbook .cover{
+    display: inline-block;
+    width: 50%;
+    height: 100%;
+    background-color: white;
+}
+.newbook .about{
+    padding: 20px 20px 20px 20px;
+    font-size: large;
+    display: inline-block;
+    width: 50%;
+    height: 100%;
+    background-color: #36353d;
+
+}
+.tag{
+    margin-top: 10%;
+    flex-direction: column;
+    gap: 10px;
+}
+.tag p{
+    margin: 4px 4px 4px 4px;
+    font-size: 12px;
+    border-radius: 13px;
+    border: 1px solid white;
+    padding: 5px;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+.tag p:hover{
+    border-radius: 0px;
+}
+.about button{
+    align-self: center;
+    margin: 20px 4px 4px 4px;
+    width: 80%;
+    font-size: 1em;
+    padding: 5px 5px 5px 5px;
+    background-color: #16b0fe;
+    color: white;
+    border-radius: 20px;
+    border: none;
+    transition: all 0.2s ease;
+}
+.about button:hover{
+    border-radius: 10px;
+    border: 2px solid white;
+}

@@ -6,3 +6,10 @@ type Book struct {
 	Name   string
 	Rating int
 }
+
+type User struct {
+	ID       int
+	Login    string
+	Password string
+	Email    string
+}
