@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AppExperiment</title>
+    <title>Sound</title>
     <link rel="stylesheet" href="/static/home_page.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,18 +16,23 @@
                 <h1>SOUND</h1>
             </div>
             <div class="links">
-                <a href="#">ГЛАВНАЯ</a>
-                <a href="#">АУДИО</a>
-                <a href="#">КНИГИ</a>
-                <a href="#">ЖАНРЫ</a>
-                <a href="#">СОХРАНЕННЫЕ</a>
+                <a href="/home">ГЛАВНАЯ</a>
+                <a href="/home">АУДИО</a>
+                <a href="/home">КНИГИ</a>
+                <a href="/home">ЖАНРЫ</a>
+                <a href="/home">СОХРАНЕННЫЕ</a>
             </div>
         
         </div>
         <div class="right">
             <h1>
-                <a href="http://localhost:8080/signin">Регистрация</a>
+                <a>{{ . }}</a>
             </h1>
+            <div class="dropdown">
+                <div class="dropdown-content">
+                    <a href="/unsign">Выйти</a> 
+                </div>
+            </div>
         </div>
     </nav>
     <div class="content">
