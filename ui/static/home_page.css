@@ -80,6 +80,13 @@ nav .right{
     background-color: #36353d;
 
 }
+.old{
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 10px;
+}
 .tag{
     margin-top: 10%;
     flex-direction: column;
@@ -99,6 +106,8 @@ nav .right{
 }
 .about button{
     align-self: center;
+    display: flex;
+    justify-content: center;
     margin: 20px 4px 4px 4px;
     width: 80%;
     font-size: 1em;
@@ -111,5 +120,44 @@ nav .right{
 }
 .about button:hover{
     border-radius: 10px;
-    border: 2px solid white;
+    background-color: white;
+    color: black;
+}
+
+.old .newbooks .newbook{
+    display: flex;
+    height: 100%;
+    width: 49%;   
+    color: white;
+    border-radius: 5px;
+    border-right: 10px solid #16b0fe;
+}
+.old .cover{
+    width: 30%;
+}
+.old .about{
+    padding: 10px 10px 10px 10px;
+    width: 70%;
+}
+.old h2{
+    font-size: 20px; 
+}
+.old p{
+    font-size: 13px;
+}
+.old .tag{
+    margin-top: 0;
+}
+.old button{
+    font-weight: bold;
+    font-size: 10px;
+    width: 50%;
+    margin-top: 0;
+}
+.old .tag p{
+    margin-top: 0px;
+    font-size: 10px;
+}
+.old .newbooks{
+    height: 140px;
 }
