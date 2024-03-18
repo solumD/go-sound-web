@@ -1,8 +1,11 @@
 package main
 
 import (
+	"database/sql"
 	"log"
 	"net/http"
+
+	_ "github.com/go-sql-driver/mysql"
 )
 
 // пользователь и мапа со всеми пользователями
@@ -48,14 +51,31 @@ func regGet(w http.ResponseWriter, r *http.Request) {
 
 func checkReg(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
-	username := r.PostFormValue("username")
+	login := r.PostFormValue("username")
 	password := r.PostFormValue("password")
-	_, exist := users[username]
-	if !exist {
-		users[username] = password
-		user = username //устанавливаем глобальное значение юзера
+
+	//открываем базу данных
+	db, err := OpenDB()
+	if err != nil {
+		log.Println(err)
+	}
+	defer db.Close()
+
+	//отправляем select-запрос
+	_, err = selectUser(db, login)
+	if err == sql.ErrNoRows {
+		//добавляем пользователя
+		err := insertUser(db, login, password)
+		if err != nil {
+			log.Println(err)
+		}
+		user = login
+		log.Println("Created User!") //устанавливаем глобальное значение юзера
 		redirectToHome(w, r)
+	} else if err != nil {
+		log.Println(err)
 	} else {
+		log.Println("User exists")
 		redirectToLogin(w, r)
 	}
 }
@@ -71,18 +91,30 @@ func loginGet(w http.ResponseWriter, r *http.Request) {
 
 func checkLogin(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
-	us := r.PostFormValue("username")
-	pass := r.PostFormValue("password")
-	if password, exist := users[us]; exist {
+	login := r.PostFormValue("username")
+	password := r.PostFormValue("password")
+
+	db, err := OpenDB()
+	if err != nil {
+		log.Println(err)
+	}
+	defer db.Close()
+	pass, err := selectUser(db, login)
+	if err == sql.ErrNoRows {
+		log.Println("User doesn't exist")
+		redirectToSignIn(w, r)
+	} else if err != nil {
+		log.Println(err)
+	} else {
 		if pass == password {
-			user = us //устанавливаем глобальное значение юзера
+			log.Println("Logged in")
+			user = login //устанавливаем глобальное значение юзера
 			redirectToHome(w, r)
 		} else {
-			http.Error(w, "Invalable password", http.StatusBadRequest)
+			w.Write([]byte("Invalid password"))
 		}
-	} else {
-		redirectToSignIn(w, r)
 	}
+
 }
 
 // выход пользователя
