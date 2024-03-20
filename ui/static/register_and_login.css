@@ -2,14 +2,6 @@ html{
     background-color: #282828;
     color: white;
     font-family: "Poppins", sans-serif;
-    font-weight: bold;
-}
-h1{
-    font-size: 4em;
-}
-h2{
-    font-size: 1.5em;
-    text-align: center;
 }
 body{
     display: flex;
@@ -17,36 +9,43 @@ body{
     justify-content: center;
     flex-direction: column;
 }
-form{
+
+h1{
+    font-size: 4em;
+
+}
+h2{
+    font-size: 1.5em;
+    text-align: center;
+}
+.container{
+    margin-top: 20px;
+    max-width: 400px;
+    border-radius: 30px;
+    padding: 20px 0px 20px 0px;
+    width: 85%;
+    background-color: #36353d;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+}
+.container label{
+    font-size: 30px;
+}
+.form{
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     gap: 10px;
-    margin-top: 20px;
-    max-width: 400px;
-    max-height: 500px;
-    border-radius: 30px;
-    padding: 50px 0px 10px 0px;
-    width: 85%;
-    background-color: #36353d;
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
 }
- label{
-    font-size: 30px;
-    margin-bottom: 0;
-}
-.button{
+button{
     color: white;
     border: none;
     font-weight: bold;
-    text-align: center;
-    padding: 0%;
+    padding: 15px 15px 15px 15px;
     border-radius: 30px;
     font-size: 15px;
     background-color: #16b0fe;
-    border:2px solid #16b0fe;
-    transition: all 0.15s ease-in-out;
+    transition: all 0.3s ease-in-out;
 }
 input{
     background-color: #282828;
@@ -57,16 +56,10 @@ input{
     width: 200px;
     font-size: 20px;
     padding-left: 30px;
-    margin-top: 0px;
     margin-bottom: 20px;
-    transition: all 0.2s ease-in-out;
-    border: 2px solid #282828;
 }
-.button:hover{
+button:hover{
     background-color: white;
     color:  #16b0fe;
 
-}
-input:hover{
-    border: 2px solid white;
 }

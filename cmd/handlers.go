@@ -9,13 +9,12 @@ import (
 )
 
 // пользователь и мапа со всеми пользователями
-var user = ""
-var users = make(map[string]string)
+var currentUser = ""
 
 // начальная страница, если пользователь не зарегистрировался
 func UnSignedHandler(w http.ResponseWriter, r *http.Request) {
 	//парсим html-шаблон
-	if len(user) == 0 {
+	if len(currentUser) == 0 {
 		//записываем шаблон в ResponseWriter w
 		err := ParseNil(w, "ui/html/home_unsigned.html")
 		if err != nil {
@@ -25,19 +24,21 @@ func UnSignedHandler(w http.ResponseWriter, r *http.Request) {
 	} else {
 		redirectToHome(w, r)
 	}
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 }
 
 // домашняя страница зарегистрированного пользователя
 func getHomeWithSignedIn(w http.ResponseWriter, r *http.Request) {
-	if len(user) == 0 {
+	if len(currentUser) == 0 {
 		redirectToSignIn(w, r)
 	} else {
-		err := Parse(w, "ui/html/home_registered.html", user)
+		err := Parse(w, "ui/html/home_registered.html", currentUser)
 		if err != nil {
 			log.Println(err.Error())
 			http.Error(w, "Internal server error", 500)
 		}
 	}
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 }
 
 // форма с регистрацией
@@ -47,6 +48,7 @@ func regGet(w http.ResponseWriter, r *http.Request) {
 		log.Println(err.Error())
 		http.Error(w, "Internal server error", 500)
 	}
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 }
 
 func checkReg(w http.ResponseWriter, r *http.Request) {
@@ -69,7 +71,7 @@ func checkReg(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			log.Println(err)
 		}
-		user = login
+		currentUser = login
 		log.Println("Created User!") //устанавливаем глобальное значение юзера
 		redirectToHome(w, r)
 	} else if err != nil {
@@ -87,6 +89,7 @@ func loginGet(w http.ResponseWriter, r *http.Request) {
 		log.Println(err.Error())
 		http.Error(w, "Internal server error", 500)
 	}
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 }
 
 func checkLogin(w http.ResponseWriter, r *http.Request) {
@@ -108,7 +111,7 @@ func checkLogin(w http.ResponseWriter, r *http.Request) {
 	} else {
 		if pass == password {
 			log.Println("Logged in")
-			user = login //устанавливаем глобальное значение юзера
+			currentUser = login //устанавливаем глобальное значение юзера
 			redirectToHome(w, r)
 		} else {
 			w.Write([]byte("Invalid password"))
@@ -117,8 +120,27 @@ func checkLogin(w http.ResponseWriter, r *http.Request) {
 
 }
 
+func favoriteGet(w http.ResponseWriter, r *http.Request) {
+	Book := Book{id: 1, User: currentUser, BookTitle: "Маленький принц", BookAuthor: "Антуан де Сент-Экзюпери"}
+	err := Parse(w, "ui/html/favorite_registered.html", Book)
+	if err != nil {
+		log.Println(err.Error())
+		http.Error(w, "Internal server error", 500)
+	}
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+}
+
+func favoriteUnSignedGet(w http.ResponseWriter, r *http.Request) {
+	err := ParseNil(w, "ui/html/favorite_unregistered.html")
+	if err != nil {
+		log.Println(err.Error())
+		http.Error(w, "Internal server error", 500)
+	}
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+}
+
 // выход пользователя
 func Exit(w http.ResponseWriter, r *http.Request) {
-	user = ""
+	currentUser = ""
 	redirectToUnregistered(w, r)
 }

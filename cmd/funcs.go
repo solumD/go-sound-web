@@ -1,14 +1,13 @@
 package main
 
 import (
-	"database/sql"
 	"html/template"
 	"log"
 	"net/http"
 )
 
 // парсинг шаблона с параметрами
-func Parse(w http.ResponseWriter, path string, params string) error {
+func Parse(w http.ResponseWriter, path string, params any) error {
 	tmpl, err := template.ParseFiles(path)
 	if err != nil {
 		log.Println(err)
@@ -41,23 +40,6 @@ func ParseNil(w http.ResponseWriter, path string) error {
 		return err
 	}
 	return nil
-}
-
-func OpenDB() (*sql.DB, error) {
-	const connstr = "root:password@tcp(localhost:3306)/sound_web"
-	db, err := sql.Open("mysql", connstr)
-	if err != nil {
-		log.Println(err)
-		return nil, err
-	}
-
-	err = db.Ping()
-	if err != nil {
-		log.Println(err)
-		return nil, err
-	}
-	log.Println("connected to database")
-	return db, nil
 }
 
 /*type neuteredFileSystem struct {

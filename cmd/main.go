@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 
 	"github.com/go-chi/chi/v5"
@@ -28,9 +29,21 @@ func main() {
 	//выход пользователя
 	r.Get(`/unsign`, Exit)
 
+	//получение своих избранных книг
+	r.Get("/favorite", favoriteGet)
+
+	//страница с избранными книгами для не зарегистрированного пользователя
+	r.Get("/favorite/unsigned", favoriteUnSignedGet)
+
 	//преобразуем визуал
 	fs := http.FileServer(http.Dir("./ui/static/"))
 	r.Handle("/static/*", http.StripPrefix("/static/", fs))
+
+	db, err := OpenDB()
+	if err != nil {
+		log.Println(err)
+	}
+	defer db.Close()
 
 	if err := http.ListenAndServe(":8080", r); err != nil {
 		fmt.Printf("Ошибка при запуске сервера: %s", err.Error())

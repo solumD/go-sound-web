@@ -7,6 +7,23 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
+func OpenDB() (*sql.DB, error) {
+	const connstr = "root:password@tcp(localhost:3306)/sound_web"
+	db, err := sql.Open("mysql", connstr)
+	if err != nil {
+		log.Println(err)
+		return nil, err
+	}
+
+	err = db.Ping()
+	if err != nil {
+		log.Println(err)
+		return nil, err
+	}
+	log.Println("connected to database")
+	return db, nil
+}
+
 // функция для проверки наличия пользователя в базе данных
 func selectUser(db *sql.DB, login string) (string, error) {
 	query := `select id, login, password from users where login = ?`
