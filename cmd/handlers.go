@@ -10,6 +10,7 @@ import (
 
 // пользователь и мапа со всеми пользователями
 var currentUser = ""
+var currentUserId = 0
 
 // начальная страница, если пользователь не зарегистрировался
 func UnSignedHandler(w http.ResponseWriter, r *http.Request) {
@@ -64,15 +65,20 @@ func checkReg(w http.ResponseWriter, r *http.Request) {
 	defer db.Close()
 
 	//отправляем select-запрос
-	_, err = selectUser(db, login)
+	_, _, err = selectUser(db, login)
 	if err == sql.ErrNoRows {
 		//добавляем пользователя
 		err := insertUser(db, login, password)
 		if err != nil {
 			log.Println(err)
 		}
-		currentUser = login
-		log.Println("Created User!") //устанавливаем глобальное значение юзера
+		id, _, err := selectUser(db, login)
+		if err != nil {
+			log.Println(err)
+		}
+		currentUser = login //устанавливаем глобальное значение юзера
+		currentUserId = id
+		log.Println("Created User!")
 		redirectToHome(w, r)
 	} else if err != nil {
 		log.Println(err)
@@ -102,7 +108,7 @@ func checkLogin(w http.ResponseWriter, r *http.Request) {
 		log.Println(err)
 	}
 	defer db.Close()
-	pass, err := selectUser(db, login)
+	id, pass, err := selectUser(db, login)
 	if err == sql.ErrNoRows {
 		log.Println("User doesn't exist")
 		redirectToSignIn(w, r)
@@ -112,6 +118,7 @@ func checkLogin(w http.ResponseWriter, r *http.Request) {
 		if pass == password {
 			log.Println("Logged in")
 			currentUser = login //устанавливаем глобальное значение юзера
+			currentUserId = id  //устанавливаем глобальное значение id юзера
 			redirectToHome(w, r)
 		} else {
 			w.Write([]byte("Invalid password"))
@@ -121,12 +128,29 @@ func checkLogin(w http.ResponseWriter, r *http.Request) {
 }
 
 func favoriteGet(w http.ResponseWriter, r *http.Request) {
-	Book := Book{id: 1, User: currentUser, BookTitle: "Маленький принц", BookAuthor: "Антуан де Сент-Экзюпери"}
-	err := Parse(w, "ui/html/favorite_registered.html", Book)
+	db, err := OpenDB()
 	if err != nil {
-		log.Println(err.Error())
-		http.Error(w, "Internal server error", 500)
+		log.Println(err)
 	}
+	defer db.Close()
+	Books, err := selectFavoriteBook(db, currentUser, currentUserId)
+	if err != nil {
+		log.Println(err)
+	}
+
+	if len(Books) == 0 {
+		err = Parse(w, "ui/html/favorite_without_books.html", currentUser)
+		if err != nil {
+			log.Println(err)
+		}
+	} else {
+		err = Parse(w, "ui/html/favorite_registered.html", Books[0])
+		if err != nil {
+			log.Println(err.Error())
+			http.Error(w, "Internal server error", 500)
+		}
+	}
+
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 }
 
@@ -142,5 +166,6 @@ func favoriteUnSignedGet(w http.ResponseWriter, r *http.Request) {
 // выход пользователя
 func Exit(w http.ResponseWriter, r *http.Request) {
 	currentUser = ""
+	currentUserId = 0
 	redirectToUnregistered(w, r)
 }
