@@ -1,274 +1,219 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SOUND</title>
-    <link rel="stylesheet" href="/static/home_page.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-</head>
-<body>
+    <link rel="stylesheet" href="/static/home_page.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
     <nav>
-        <div class="left">
-            <div class="logo">
-                <h1>SOUND</h1>
-            </div>
-            <div class="links">
-                <a href="/home">ГЛАВНАЯ</a>
-                <a href="/favorite">ИЗБРАННОЕ</a>
-                <!-- <a href="/home">КНИГИ</a> -->
-                <!-- <a href="/home">ЖАНРЫ</a> -->
-                <!-- <a href="/home">АУДИО</a> -->
-            </div>
+      <div class="left">
+        <div class="logo">
+          <h1>SOUND</h1>
         </div>
-        <div class="right">
-            <h1>
-                <a>{{ . }}</a>
-            </h1>
-            <div class="dropdown">
-                <div class="dropdown-content">
-                    <a href="/unsign">Выйти</a> 
-                </div>
-            </div>
+        <div class="links">
+          <!-- <a href="/home">ГЛАВНАЯ</a> -->
+          <!-- <a href="/favorite">ИЗБРАННОЕ</a> -->
+          <!-- <a href="/home">КНИГИ</a> -->
+          <!-- <a href="/home">ЖАНРЫ</a> -->
+          <!-- <a href="/home">АУДИО</a> -->
         </div>
+      </div>
+      <div class="right">
+        <h1>
+          <a>{{ . }}</a>
+        </h1>
+        <div class="dropdown">
+          <div class="dropdown-content">
+            <a href="/unsign">Выйти</a>
+          </div>
+        </div>
+      </div>
     </nav>
     <div class="content">
-        <div class="new">
-            <h1>
-                Новое
-            </h1>
-            <div class="newbooks">
-                <div class="newbook">
-                    <div class="cover">
-                        
-                    </div>
-                    <div class="about">
-                       <h2>
-                            Одиссея
-                       </h2>
-                       <p>
-                            Гомер
-                       </p>
-                       <div class="tag">
-                        <p>
-                            всемирная литература
-                        </p>
-                        <p>
-                            эпос
-                        </p>
-                        <p>
-                            4,9
-                        </p>
-                       </div>
-                       <button>
-                            Подробнее
-                       </button>
-                    </div>
-                </div>
-                <div class="newbook">
-                    <div class="cover">
-                        
-                    </div>
-                    <div class="about">
-                       <h2>
-                            Одиссея
-                       </h2>
-                       <p>
-                            Гомер
-                       </p>
-                       <div class="tag">
-                        <p>
-                            всемирная литература
-                        </p>
-                        <p>
-                            эпос
-                        </p>
-                        <p>
-                            4,9
-                        </p>
-                       </div>
-                       <button>
-                            Подробнее
-                       </button>
-                    </div>
-                </div>
+      <div class="new">
+        <h1>Новое</h1>
+        <div class="newbooks">
+          <div class="newbook">
+            <div class="cover">
+              <img src="/static/little_prince/little_prince1.jpeg" alt="" />
             </div>
+            <div class="about">
+              <h2>Маленький принц</h2>
+              <p>Антуан де Сент-Экзюпери</p>
+              <div class="tag">
+                <p>Всемирная литература</p>
+                <p>Басня</p>
+                <p>5</p>
+              </div>
+              <button onclick="openModal()">Подробнее</button>
+            </div>
+          </div>
+          <div class="newbook">
+            <div class="cover">
+              <img src="/static/black_allei/black_allei1.png" alt="" />
+            </div>
+            <div class="about">
+              <h2>Темные аллеи</h2>
+              <p>Иван Бунин</p>
+              <div class="tag">
+                <p>Классическая литература</p>
+                <p>Рассказ</p>
+                <p>4,1</p>
+              </div>
+              <button onclick="openModal()">Подробнее</button>
+            </div>
+          </div>
         </div>
-        <div class="old">
-            <h1>
-                Книги
-            </h1>
-            <div class="newbooks">
-                <div class="newbook">
-                    <div class="cover">
-                        
-                    </div>
-                    <div class="about">
-                       <h2>
-                            Одиссея
-                       </h2>
-                       <p>
-                            Гомер
-                       </p>
-                       <div class="tag">
-                        <p>
-                            всемирная литература
-                        </p>
-                        <p>
-                            эпос
-                        </p>
-                        <p>
-                            4,9
-                        </p>
-                       </div>
-                       <button>
-                            Подробнее
-                       </button>
-                    </div>
-                </div>
-                <div class="newbook">
-                    <div class="cover">
-                        
-                    </div>
-                    <div class="about">
-                       <h2>
-                            Одиссея
-                       </h2>
-                       <p>
-                            Гомер
-                       </p>
-                       <div class="tag">
-                        <p>
-                            всемирная литература
-                        </p>
-                        <p>
-                            эпос
-                        </p>
-                        <p>
-                            4,9
-                        </p>
-                       </div>
-                       <button>
-                            Подробнее
-                       </button>
-                    </div>
-                </div>
+      </div>
+      <div class="old">
+        <h1>Книги</h1>
+        <div class="newbooks">
+          <div class="newbook">
+            <div class="cover">
+              <img src="/static/legkoe_dihanie/legkoe_dihanie1.png" alt="" />
             </div>
-            <div class="newbooks">
-                <div class="newbook">
-                    <div class="cover">
-                        
-                    </div>
-                    <div class="about">
-                       <h2>
-                            Одиссея
-                       </h2>
-                       <p>
-                            Гомер
-                       </p>
-                       <div class="tag">
-                        <p>
-                            всемирная литература
-                        </p>
-                        <p>
-                            эпос
-                        </p>
-                        <p>
-                            4,9
-                        </p>
-                       </div>
-                       <button>
-                            Подробнее
-                       </button>
-                    </div>
-                </div>
-                <div class="newbook">
-                    <div class="cover">
-                        
-                    </div>
-                    <div class="about">
-                       <h2>
-                            Одиссея
-                       </h2>
-                       <p>
-                            Гомер
-                       </p>
-                       <div class="tag">
-                        <p>
-                            всемирная литература
-                        </p>
-                        <p>
-                            эпос
-                        </p>
-                        <p>
-                            4,9
-                        </p>
-                       </div>
-                       <button>
-                            Подробнее
-                       </button>
-                    </div>
-                </div>
+            <div class="about">
+              <h2>Лёгкое дыхание</h2>
+              <p>Иван Бунин</p>
+              <div class="tag">
+                <p>Классическая литература</p>
+                <p>Рассказ</p>
+                <p>4,8</p>
+              </div>
+              <button onclick="openModal()">Подробнее</button>
             </div>
-            <div class="newbooks">
-                <div class="newbook">
-                    <div class="cover">
-                        
-                    </div>
-                    <div class="about">
-                       <h2>
-                            Одиссея
-                       </h2>
-                       <p>
-                            Гомер
-                       </p>
-                       <div class="tag">
-                        <p>
-                            всемирная литература
-                        </p>
-                        <p>
-                            эпос
-                        </p>
-                        <p>
-                            4,9
-                        </p>
-                       </div>
-                       <button>
-                            Подробнее
-                       </button>
-                    </div>
-                </div>
-                <div class="newbook">
-                    <div class="cover">
-                        
-                    </div>
-                    <div class="about">
-                       <h2>
-                            Одиссея
-                       </h2>
-                       <p>
-                            Гомер
-                       </p>
-                       <div class="tag">
-                        <p>
-                            всемирная литература
-                        </p>
-                        <p>
-                            эпос
-                        </p>
-                        <p>
-                            4,9
-                        </p>
-                       </div>
-                       <button>
-                            Подробнее
-                       </button>
-                    </div>
-                </div>
+          </div>
+          <div class="newbook">
+            <div class="cover">
+              <img src="/static/chistiy_ponedelnik/chistiy_ponedelnik1.png" alt="" />
             </div>
+            <div class="about">
+              <h2>Чистый понедельник</h2>
+              <p>Иван Бунин</p>
+              <div class="tag">
+                <p>Классическая литература</p>
+                <p>Новелла</p>
+                <p>4,3</p>
+              </div>
+              <button onclick="openModal()">Подробнее</button>
+            </div>
+          </div>
         </div>
+        <div class="newbooks">
+          <div class="newbook">
+            <div class="cover">
+              <img src="/static/otci_i_deti/otci_i_deti1.png" alt="" />
+            </div>
+            <div class="about">
+              <h2>Отцы и дети</h2>
+              <p>Иван Тургенев</p>
+              <div class="tag">
+                <p>Классическая литература</p>
+                <p>Роман</p>
+                <p>4,5</p>
+              </div>
+              <button onclick="openModal()">Подробнее</button>
+            </div>
+          </div>
+          <div class="newbook">
+            <div class="cover">
+              <img src="/static/odisseya/odisseya1.png" alt="" />
+            </div>
+            <div class="about">
+              <h2>Одиссея</h2>
+              <p>Гомер</p>
+              <div class="tag">
+                <p>Всемирная литература</p>
+                <p>Эпос</p>
+                <p>4,9</p>
+              </div>
+              <button onclick="openModal()">Подробнее</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-</body>
+
+    <div class="modal">
+      <div class="main">
+        <div class="left">
+          <figure>
+            <img src="/static/little_prince/little_prince2.jpeg" alt="" />
+          </figure>
+          <h2>Маленький принц</h2>
+          <p></p>
+          <button>
+            Проверь себя
+            <p><span></span><span></span><span></span><span></span></p>
+          </button>
+        </div>
+        <div class="description">
+          Однажды лётчик, самолёт которого потерпел крушение в пустыне, встретил там необычного мальчика. 
+          Так начинается история про Маленького принца с далёкой планеты. Вместе с Маленьким принцем, 
+          слушатель познакомится с мудрым Лисом, капризной Розой, Фонарщиком и самыми разными жителями других планет, 
+          поймёт, что такое дружба, верность и ответственность.
+        </div>
+      </div>
+      <div class="bottom">
+        <!-- <span class="progress"></span> -->
+        <audio
+          src="/static/little_prince/little_prince.m4a"
+          class="audio"
+          controls
+        ></audio>
+        <div class="controller">
+          <div class="controls">
+            <img src="/static/prev.svg" alt="" onclick="prev()" />
+            <img src="/static/play.svg" alt="" onclick="play()" class="play" />
+            <img
+              src="/static/stop.svg"
+              class="pause dn"
+              onclick="pause()"
+              alt=""
+            />
+            <img src="/static/next.svg" alt="" onclick="next()" />
+          </div>
+          <img
+            src="/static/close.svg"
+            alt=""
+            class="closer"
+            onclick="closeModal()"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="controller cb">
+      <section>
+        <!-- <h2>Одиссея</h2> 
+        <p>Гомер</p> -->
+      </section>
+      <div class="controls">
+        <img src="/static/prev.svg" alt="" onclick="prev()" />
+        <img src="/static/play.svg" alt="" onclick="played()" class="played" />
+        <img
+          src="/static/stop.svg"
+          class="paused dn"
+          onclick="paused()"
+          alt=""
+        />
+        <img src="/static/next.svg" alt="" onclick="next()" />
+      </div>
+      <img
+        src="/static/open.svg"
+        alt=""
+        class="opener"
+        onclick="openModal()"
+      />
+    </div>
+  </body>
+  <script src="/static/script.js"></script>
 </html>
